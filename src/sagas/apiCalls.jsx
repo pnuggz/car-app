@@ -1,11 +1,11 @@
 import LoginAPI from "../apis/loginApi";
 import SignupAPI from "../apis/signupApi";
+import UserAPI from "../apis/userApi";
 import { handleApiErrors } from "../components/templates/api-errors";
 
 export const loginAPI = (username, password) => {
   console.log("logging in SAGA API");
   return LoginAPI.loginRequest(username, password)
-    .then(handleApiErrors)
     .then(res => res.json())
     .then(login => login)
     .catch(error => {
@@ -44,4 +44,10 @@ export const signupAPI = (
   )
     .then(res => res.json())
     .then(register_success => register_success);
+};
+
+export const userAPI = token => {
+  return UserAPI.getUser(token)
+    .then(res => res.json())
+    .then(userInfo => userInfo.data);
 };

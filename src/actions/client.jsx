@@ -1,7 +1,6 @@
-export function setClient(token) {
+export function setClient() {
   return {
-    type: "CLIENT_SET",
-    token
+    type: "CLIENT_SET"
   };
 }
 

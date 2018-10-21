@@ -1,12 +1,11 @@
 import { setClient } from "../../actions/client";
 
-function checkAuthorization(dispatch) {
+export default function checkAuthorization() {
   const userInfo = sessionStorage.getItem("userInfo");
-  const storedToken = userInfo.token;
-  console.log("test");
-  if (storedToken) {
-    const token = JSON.parse(storedToken);
+  const jsonUserInfo = JSON.parse(userInfo);
 
+  if (userInfo) {
+    const token = jsonUserInfo.token;
     const createdDate = new Date(token.created);
     const created = Math.round(createdDate.getTime() / 1000);
     const ttl = 1209600;
@@ -14,44 +13,10 @@ function checkAuthorization(dispatch) {
 
     if (created > expiry) return false;
 
-    dispatch(setClient(token));
+    setClient(token);
+
     return true;
   }
 
   return false;
-}
-
-export function checkIndexAuthorization({ dispatch }) {
-  console.log("checkAuthorization success");
-  return (nextState, replace, next) => {
-    console.log("checkAuthorization success");
-    if (checkAuthorization(dispatch)) {
-      replace("landing");
-
-      return next();
-    }
-
-    replace("login");
-    return next();
-  };
-}
-
-export function checkAppAuthorization({ dispatch, getState }) {
-  console.log("checkAuthorization success");
-  return (nextState, replace, next) => {
-    const client = getState().client;
-
-    if (client && client.token) return next();
-
-    if (checkAuthorization(dispatch)) return next();
-
-    if (checkAuthorization(dispatch)) {
-      replace("landing");
-
-      return next();
-    }
-
-    replace("login");
-    return next();
-  };
 }

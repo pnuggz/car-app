@@ -7,8 +7,8 @@ export function client(state = initialState, action) {
   switch (action.type) {
     case "CLIENT_SET":
       return {
-        id: action.token.userId,
-        token: action.token
+        id: action.payload.id,
+        token: action.payload.token
       };
 
     case "CLIENT_UNSET":

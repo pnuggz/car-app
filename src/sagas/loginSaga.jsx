@@ -3,16 +3,19 @@ import { take, fork, cancel, call, put, cancelled } from "redux-saga/effects";
 import { setClient, unsetClient } from "../actions/client";
 import { loginAPI } from "./apiCalls";
 
+import history from "../lib/history";
+
 export function* logout() {
-  // dispatches the CLIENT_UNSET action
-  yield put(unsetClient());
+  console.log("working");
 
   // remove our token
   sessionStorage.removeItem("userInfo");
 
+  yield put({ type: "CLIENT_UNSET_SUCCESS" });
+
   // redirect to the /login screen
   //eslint-disable-next-line
-  history.push("/login");
+  history.push("/");
 }
 
 export function* loginRequest(action) {
@@ -23,36 +26,34 @@ export function* loginRequest(action) {
   try {
     const login = yield call(loginAPI, username, password);
 
-    yield put({ type: "LOGIN_SUCCESS" });
+    if (login.token) {
+      yield put({ type: "LOGIN_SUCCESS" });
 
-    let token = login.token;
-    let userData = login.data;
-    let userInfo = {
-      token: token,
-      data: userData
-    };
+      let token = login.token;
+      let id = login.data.id;
+      let userData = login.data;
+      let userInfo = {
+        token: token,
+        data: userData
+      };
 
-    console.log(userInfo);
-    console.log(token);
-    console.log(userData);
-    console.log(login.error);
+      console.log(token, id);
 
-    yield put(setClient(token));
+      yield put({ type: "CLIENT_SET", payload: { id, token } });
 
-    console.log("setting local storage");
+      sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
 
-    sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+      //eslint-disable-next-line
+      history.push("/");
+    }
 
-    console.log("all set");
-
-    //eslint-disable-next-line
-    // history.push("/");
+    yield put({ type: "LOGIN_ERROR", payload: login.error.message });
   } catch (error) {
-    yield put({ type: "LOGIN_ERROR", payload: error.message });
+    yield put({ type: "LOGIN_ERROR", payload: error });
   } finally {
     if (yield cancelled()) {
       //eslint-disable-next-line
-      // history.push("/login");
+      history.push("/login");
     }
   }
 

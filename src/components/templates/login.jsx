@@ -64,10 +64,7 @@ class Login extends Component {
             </form>
           </div>
           <div className="auth-messages">
-            {!requesting &&
-              !!errors.length && (
-                <Errors message="Failure to signup due to:" errors={errors} />
-              )}
+            {!requesting && !!errors.length && <Errors errors={errors} />}
             {!requesting &&
               !!messages.length && <Messages messages={messages} />}
             {!requesting &&
