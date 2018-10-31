@@ -1,0 +1,290 @@
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Navigation from "../templates/navigation";
+import LoginNav from "../templates/loginNav";
+
+import checkAuthorization from "../templates/check-auth";
+import history from "../../lib/history";
+
+import loadUser from "../../actions/user";
+import loadModels from "../../actions/models";
+import loadMakes from "../../actions/makes";
+import loadLocations from "../../actions/locations";
+
+class CarLandingPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { selectedValue: 0 };
+  }
+
+  submit = values => {
+    this.props.searchRequest(values);
+  };
+
+  componentWillMount() {
+    if (checkAuthorization() === false) {
+      history.push("/login");
+    }
+
+    if (checkAuthorization() === true) {
+      this.props.loadUser();
+      this.props.loadModels();
+      this.props.loadMakes();
+      this.props.loadLocations();
+    }
+  }
+
+  render() {
+    const { handleSubmit, user, models, makes, locations } = this.props;
+
+    return (
+      <div className="container">
+        {user.firstname ? (
+          <div>
+            <div className="row justify-content-md-center">
+              <div className="col-md-">
+                <Navigation />
+              </div>
+              <div className=".col-sm-">
+                <LoginNav />
+              </div>
+            </div>
+            <div id="home" className="row justify-content-md-center">
+              <div className="App">
+                {/* Heading for Welcome */}
+                <header className="App-header">
+                  <div className="row justify-content-md-center">
+                    Welcome {user.firstname}
+                  </div>
+                </header>
+
+                {/* Search Container */}
+                <div className="search-form container">
+                  <div className="row justify-content-md-center">
+                    Search Car Form
+                  </div>
+                  <form onSubmit={handleSubmit(this.submit)}>
+                    <div className="row border">
+                      <div className="col">
+                        <div className="row justify-content-md-center">
+                          <div className="col">
+                            <div className="dropdown">
+                              {console.log(this.state.selectedValue)}
+                              <select
+                                className="btn btn-secondary dropdown-toggle"
+                                ref="selectMakes"
+                                onChange={event =>
+                                  this.setState({
+                                    selectedValue: event.target.value
+                                  })
+                                }
+                                value={this.state.selectedValue}
+                              >
+                                {console.log(this.state.selectedValue)}
+                                <option defaultValue value="0">
+                                  Select Make
+                                </option>
+                                {makes != undefined ? (
+                                  makes.map(make => (
+                                    <option
+                                      key={make.make_id}
+                                      value={make.make_id}
+                                    >
+                                      {make.make_name}
+                                    </option>
+                                  ))
+                                ) : (
+                                  <option>Loading....</option>
+                                )}
+                              </select>
+                            </div>
+                          </div>
+                          <div className="col">
+                            <div className="dropdown">
+                              <select className="btn btn-secondary dropdown-toggle">
+                                <option defaultValue>Model</option>
+                                {console.log(this.state.selectedValue)}
+                                {models != undefined ? (
+                                  this.state.selectedValue != 0 ? (
+                                    models
+                                      .filter(
+                                        model =>
+                                          model.make_id ==
+                                          this.state.selectedValue
+                                      )
+                                      .map(model => (
+                                        <option
+                                          key={model.model_id}
+                                          value={model.model_id}
+                                        >
+                                          {model.model_name}
+                                        </option>
+                                      ))
+                                  ) : (
+                                    <option>Select Make...</option>
+                                  )
+                                ) : (
+                                  <option>Loading....</option>
+                                )}
+                              </select>
+                            </div>
+                          </div>
+                          <div className="col">
+                            <div className="dropdown">
+                              <select className="btn btn-secondary dropdown-toggle">
+                                <option defaultValue value="0">
+                                  Location
+                                </option>
+                                {locations != undefined ? (
+                                  locations.map(location => (
+                                    <option
+                                      key={location.location_id}
+                                      value={location.location_id}
+                                    >
+                                      {location.location}
+                                    </option>
+                                  ))
+                                ) : (
+                                  <option>Loading....</option>
+                                )}
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row justify-content-md-center">
+                          <div className="col">
+                            <input
+                              type="text"
+                              className="min-price form-control col"
+                              placeholder="Min Price"
+                            />
+                          </div>
+                          <div className="col">
+                            <input
+                              type="text"
+                              className="max-price form-control col"
+                              placeholder="Max Price"
+                            />
+                          </div>
+                          <div className="col">
+                            <button className="btn btn-secondary">
+                              Search
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                {/* Current Searches */}
+                <div className="container">
+                  <div className="row justify-content-md-center">
+                    Current Searches
+                  </div>
+
+                  {/* Repeating Results */}
+                  <div className="row justify-content-md-center border">
+                    <div className="col">
+                      <div className="row align-items-center">
+                        <div className="col-4">
+                          <div className="row align-items-center">
+                            <div className="col">Make</div>
+                          </div>
+                          <div className="row align-items-center">
+                            <div className="col">BMW</div>
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <div className="row align-items-center">
+                            <div className="col">Model</div>
+                          </div>
+                          <div className="row align-items-center">
+                            <div className="col">535d</div>
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <div className="row align-items-center">
+                            <div className="col">Results</div>
+                          </div>
+                          <div className="row align-items-center">
+                            <div className="col">5</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row align-items-center">
+                        <div className="col-4">
+                          <div className="row align-items-center">
+                            <div className="col">Price Range</div>
+                          </div>
+                          <div className="row align-items-center">
+                            <div className="col">$0-$10,000</div>
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <div className="row align-items-center">
+                            <div className="col">Location</div>
+                          </div>
+                          <div className="row align-items-center">
+                            <div className="col">WA</div>
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <div className="row align-items-center">
+                            <div className="col">
+                              <button className="btn btn-secondary">--</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Repeat Ends Here */}
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div />
+        )}
+      </div>
+    );
+  }
+}
+
+CarLandingPage.propTypes = {
+  user: PropTypes.object,
+  models: PropTypes.array,
+  makes: PropTypes.array,
+  locations: PropTypes.array
+};
+
+const mapStateToProps = state => ({
+  user: state.user.userInfo,
+  models: state.models.models,
+  makes: state.makes.makes,
+  locations: state.locations.locations
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadUser: function() {
+      return dispatch(loadUser());
+    },
+    loadModels: function() {
+      return dispatch(loadModels());
+    },
+    loadMakes: function() {
+      return dispatch(loadMakes());
+    },
+    loadLocations: function() {
+      return dispatch(loadLocations());
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CarLandingPage);

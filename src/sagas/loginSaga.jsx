@@ -1,13 +1,9 @@
-import { take, fork, cancel, call, put, cancelled } from "redux-saga/effects";
+import { call, put, cancelled } from "redux-saga/effects";
 
-import { setClient, unsetClient } from "../actions/client";
 import { loginAPI } from "./apiCalls";
-
 import history from "../lib/history";
 
 export function* logout() {
-  console.log("working");
-
   // remove our token
   sessionStorage.removeItem("userInfo");
 
@@ -34,10 +30,9 @@ export function* loginRequest(action) {
       let userData = login.data;
       let userInfo = {
         token: token,
+        token_date: Date.now(),
         data: userData
       };
-
-      console.log(token, id);
 
       yield put({ type: "CLIENT_SET", payload: { id, token } });
 

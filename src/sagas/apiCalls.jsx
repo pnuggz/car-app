@@ -1,7 +1,36 @@
 import LoginAPI from "../apis/loginApi";
 import SignupAPI from "../apis/signupApi";
 import UserAPI from "../apis/userApi";
+import ModelsAPI from "../apis/modelsApi";
+import MakesAPI from "../apis/makesApi";
+import LocationsAPI from "../apis/locationsApi";
+import SearchAPI from "../apis/searchApi";
+import RunningSearchAPI from "../apis/runningSearchApi";
 import { handleApiErrors } from "../components/templates/api-errors";
+
+export const runningSearchAPI = token => {
+  return RunningSearchAPI.getRunningSearch(token)
+    .then(res => res.json())
+    .then(runningSearch => runningSearch.data);
+};
+
+export const modelsAPI = token => {
+  return ModelsAPI.getModels(token)
+    .then(res => res.json())
+    .then(models => models.data);
+};
+
+export const makesAPI = token => {
+  return MakesAPI.getMakes(token)
+    .then(res => res.json())
+    .then(makes => makes.data);
+};
+
+export const locationsAPI = token => {
+  return LocationsAPI.getLocations(token)
+    .then(res => res.json())
+    .then(locations => locations.data);
+};
 
 export const loginAPI = (username, password) => {
   console.log("logging in SAGA API");
@@ -50,4 +79,17 @@ export const userAPI = token => {
   return UserAPI.getUser(token)
     .then(res => res.json())
     .then(userInfo => userInfo.data);
+};
+
+export const searchAPI = (make, model, location, minPrice, maxPrice, token) => {
+  return SearchAPI.submitSearch(
+    make,
+    model,
+    location,
+    minPrice,
+    maxPrice,
+    token
+  )
+    .then(res => res.json())
+    .then(success => success);
 };
