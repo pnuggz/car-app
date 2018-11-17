@@ -8,6 +8,7 @@ import { loadMakes } from "./makesSaga";
 import { loadLocations } from "./locationsSaga";
 import { searchRequest } from "./searchSaga";
 import { loadRunningSearch } from "./runningSearchSaga";
+import { removeSearch } from "./removeSaga";
 
 function* rootSaga() {
   yield [
@@ -19,7 +20,8 @@ function* rootSaga() {
     takeLatest("MAKES_REQUEST", loadMakes),
     takeLatest("LOCATIONS_REQUEST", loadLocations),
     takeLatest("SEARCH_REQUEST", searchRequest),
-    takeLatest("RUNNING_SEARCH_REQUEST", loadRunningSearch)
+    takeLatest("RUNNING_SEARCH_REQUEST", loadRunningSearch),
+    takeLatest("REMOVE_REQUEST", removeSearch)
   ];
 }
 

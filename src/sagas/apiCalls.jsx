@@ -6,6 +6,7 @@ import MakesAPI from "../apis/makesApi";
 import LocationsAPI from "../apis/locationsApi";
 import SearchAPI from "../apis/searchApi";
 import RunningSearchAPI from "../apis/runningSearchApi";
+import RemoveAPI from "../apis/removeApi";
 import { handleApiErrors } from "../components/templates/api-errors";
 
 export const runningSearchAPI = token => {
@@ -90,6 +91,12 @@ export const searchAPI = (make, model, location, minPrice, maxPrice, token) => {
     maxPrice,
     token
   )
+    .then(res => res.json())
+    .then(success => success);
+};
+
+export const removeAPI = (searchid, token) => {
+  return RemoveAPI.removeSearch(searchid, token)
     .then(res => res.json())
     .then(success => success);
 };

@@ -37,7 +37,8 @@ for z in makes:
 		time.sleep(10)
 		total_pagination = driver.find_elements_by_xpath("""//div[@class="tabbed-pagination"]/div[@class="pagination-container"]/div[@class="pagination-container"]/div[@class="pagination"]/p""")[0].text
 		print(total_pagination)
-		number_of_pages = 2
+		number_of_pages_split = total_pagination.split(" ")
+		number_of_pages = number_of_pages_split[1]
 		print(number_of_pages)
 		page = 0
 		while page < number_of_pages:

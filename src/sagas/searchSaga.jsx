@@ -3,6 +3,8 @@ import { call, put, cancelled } from "redux-saga/effects";
 import { searchAPI } from "./apiCalls";
 import history from "../lib/history";
 
+import { runningSearchAPI } from "./apiCalls";
+
 export function* searchRequest(action) {
   console.log(action);
   var make = action.selectMake;
@@ -28,7 +30,9 @@ export function* searchRequest(action) {
     if (search.success) {
       yield put({ type: "SEARCH_SUCCESS" });
 
-      history.push("/landing");
+      const runningSearch = yield call(runningSearchAPI, token);
+
+      yield put({ type: "RUNNING_SEARCH_SUCCESS", payload: runningSearch });
     }
 
     yield put({ type: "SEARCH_ERROR", payload: search.error.message });

@@ -9,6 +9,7 @@ import { makes } from "./makesReducer";
 import { locations } from "./locationsReducer";
 import { search } from "./searchReducer";
 import { runningSearch } from "./runningSearchReducer";
+import { remove } from "./removeReducer";
 
 const rootReducer = combineReducers({
   login,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   makes,
   locations,
   search,
-  runningSearch
+  runningSearch,
+  remove
 });
 
 export default rootReducer;

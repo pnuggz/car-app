@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Navigation from "../templates/navigation";
 import LoginNav from "../templates/loginNav";
 import { reduxForm, Field, formValueSelector } from "redux-form";
+import { Modal, OverlayTrigger, Button } from "react-bootstrap";
 
 import checkAuthorization from "../templates/check-auth";
 import history from "../../lib/history";
@@ -15,11 +16,31 @@ import loadLocations from "../../actions/locations";
 import loadRunningSearch from "../../actions/runningSearch";
 
 import searchRequest from "../../actions/search";
+import removeRequest from "../../actions/remove";
 
 class CarLandingPage extends Component {
   constructor(props) {
     super(props);
     this.state = { selectedValue: 0 };
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.state = {
+      show: false,
+      searchid: null
+    };
+  }
+
+  handleClose() {
+    this.setState({ show: false, searchid: null });
+  }
+
+  handleShow(e) {
+    this.setState({
+      show: true,
+      searchid: e
+    });
   }
 
   submit = values => {
@@ -49,6 +70,11 @@ class CarLandingPage extends Component {
       locations,
       runningSearch
     } = this.props;
+
+    const remove = val => {
+      this.props.removeRequest(val);
+      this.handleClose();
+    };
 
     return (
       <div className="container">
@@ -82,7 +108,6 @@ class CarLandingPage extends Component {
                         <div className="row justify-content-md-center">
                           <div className="col">
                             <div className="dropdown">
-                              {console.log(this.state.selectedValue)}
                               <Field
                                 component="select"
                                 className="btn btn-secondary dropdown-toggle"
@@ -120,7 +145,6 @@ class CarLandingPage extends Component {
                                 className="btn btn-secondary dropdown-toggle"
                                 disabled={this.state.selectedValue == 0}
                               >
-                                {console.log(this.state.selectedValue)}
                                 {models != undefined ? (
                                   <React.Fragment>
                                     <option defaultValue value="0" key="0">
@@ -210,7 +234,6 @@ class CarLandingPage extends Component {
                     </div>
                   </form>
                 </div>
-                {console.log(this.state)}
 
                 {/* Current Searches */}
                 <div className="container">
@@ -219,7 +242,6 @@ class CarLandingPage extends Component {
                   </div>
 
                   {/* Repeating Results */}
-                  {console.log(runningSearch)}
                   {runningSearch != undefined ? (
                     runningSearch.map(searchRes => (
                       <div
@@ -282,7 +304,15 @@ class CarLandingPage extends Component {
                             <div className="col-4">
                               <div className="row align-items-center">
                                 <div className="col">
-                                  <button className="btn btn-secondary">
+                                  <button
+                                    className="btn btn-secondary"
+                                    searchid={searchRes.search_id}
+                                    onClick={e =>
+                                      this.handleShow(
+                                        e.target.getAttribute("searchid")
+                                      )
+                                    }
+                                  >
                                     --
                                   </button>
                                 </div>
@@ -305,6 +335,25 @@ class CarLandingPage extends Component {
         ) : (
           <div />
         )}
+
+        <Modal
+          show={this.state.show}
+          onHide={this.handleClose}
+          style={{ opacity: "1" }}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>
+              Are you sure you want to remove this search? {this.state.searchid}
+            </h4>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.handleClose}>Cancel</Button>
+            <Button onClick={() => remove(this.state.searchid)}>Confirm</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }
@@ -317,7 +366,9 @@ CarLandingPage.propTypes = {
   models: PropTypes.array,
   makes: PropTypes.array,
   locations: PropTypes.array,
-  runningSearch: PropTypes.array
+  runningSearch: PropTypes.array,
+  remove: PropTypes.func,
+  removeRequest: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -352,6 +403,9 @@ function mapDispatchToProps(dispatch) {
     },
     loadRunningSearch: function() {
       return dispatch(loadRunningSearch());
+    },
+    removeRequest: function(val) {
+      return dispatch(removeRequest(val));
     }
   };
 }

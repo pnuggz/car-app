@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { Router, Switch, Route, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore";
-import "./index.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 import HomePage from "./components/pages/homePage";

@@ -1,7 +1,6 @@
 const initialState = {
   requesting: false,
   successful: false,
-  messages: [],
   errors: []
 };
 
@@ -11,19 +10,12 @@ export function search(state = initialState, action) {
       return {
         requesting: true,
         successful: false,
-        messages: [{ body: "Logging in...", time: new Date() }],
         errors: []
       };
 
     case "SEARCH_SUCCESS":
       return {
         errors: [],
-        messages: [
-          {
-            body: action.payload,
-            time: new Date()
-          }
-        ],
         requesting: false,
         successful: true
       };
@@ -36,7 +28,6 @@ export function search(state = initialState, action) {
             time: new Date()
           }
         ]),
-        messages: [],
         requesting: false,
         successful: false
       };
