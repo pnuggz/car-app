@@ -4,6 +4,7 @@ import { Router, Switch, Route, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore";
 import "bootstrap/dist/css/bootstrap.css";
+import "./styles/styles.css";
 
 import HomePage from "./components/pages/homePage";
 import Login from "./components/templates/login";

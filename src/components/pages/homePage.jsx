@@ -4,7 +4,7 @@ import LoginNav from "../templates/loginNav";
 
 const HomePage = () => (
   <div className="container">
-    <div className="row justify-content-md-center">
+    <div id="navigation" className="row justify-content-md-center">
       <div className="col-md-">
         <Navigation />
       </div>
