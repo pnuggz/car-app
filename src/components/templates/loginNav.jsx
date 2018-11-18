@@ -7,7 +7,7 @@ import checkAuthorization from "./check-auth";
 import logout from "../../actions/logout";
 
 let LoginNav = () => (
-  <nav>
+  <nav id="navigation-login">
     <ul className="nav justify-content-center">
       {checkAuthorization() === false ? (
         <li className="nav-item">

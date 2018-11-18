@@ -12,7 +12,7 @@ const ProfilePage = () => (
         <LoginNav />
       </div>
     </div>
-    <div id="home" className="row justify-content-md-center" />
+    <div id="profile" className="row justify-content-md-center" />
   </div>
 );
 

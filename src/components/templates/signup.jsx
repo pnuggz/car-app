@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { reduxForm, Field, formValueSelector } from "redux-form";
+import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
-import { Link } from "react-router";
 import PropTypes from "prop-types";
 
 import signupRequest from "../../actions/signup";
@@ -181,19 +180,18 @@ class Signup extends Component {
             </form>
 
             <div className="auth-messages">
-              {!requesting &&
-                !!errors.length && (
-                  <Errors message="Failure to signup due to:" errors={errors} />
-                )}
-              {!requesting &&
-                !!messages.length && <Messages messages={messages} />}
-              {!requesting &&
-                successful && (
-                  <div>
-                    Signup Successful!
-                    {/* <Link to="/login">Click here to Login »</Link> */}
-                  </div>
-                )}
+              {!requesting && !!errors.length && (
+                <Errors message="Failure to signup due to:" errors={errors} />
+              )}
+              {!requesting && !!messages.length && (
+                <Messages messages={messages} />
+              )}
+              {!requesting && successful && (
+                <div>
+                  Signup Successful!
+                  {/* <Link to="/login">Click here to Login »</Link> */}
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -1,4 +1,18 @@
 body {
-  background-color: #1d2d44;
-  border-top: 5px solid #0d1321;
+  background-color: #0d1321;
+  border-top: 5px solid #3e5c76;
+}
+
+#app-container {
+  .navigation-site {
+    height: 55px;
+    margin-top: 10px;
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+
+    a {
+      color: wheat;
+    }
+  }
 }

@@ -3,8 +3,8 @@ import Navigation from "../templates/navigation";
 import LoginNav from "../templates/loginNav";
 
 const HomePage = () => (
-  <div className="container">
-    <div id="navigation" className="row justify-content-md-center">
+  <div className="app-container">
+    <div className="row navigation">
       <div className="col-md-">
         <Navigation />
       </div>

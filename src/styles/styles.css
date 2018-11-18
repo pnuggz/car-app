@@ -1,20 +1,18 @@
 body {
-  background-color: #1d2d44;
-  border-top: 5px solid #0d1321; }
+  background-color: #0d1321;
+  border-top: 5px solid #3e5c76; }
 
-#navigation {
+#app-container .navigation-site {
   height: 55px;
   margin-top: 10px;
   width: 100%;
-  background-color: #3e5c76;
   margin: 0;
   padding: 5px; }
-  #navigation a {
+  #app-container .navigation-site a {
     color: wheat; }
 
 #home {
   width: 100%;
-  background-color: #748cab;
   min-height: 100vh;
   margin-left: 0;
   margin-right: 0; }
