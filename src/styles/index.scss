@@ -4,15 +4,25 @@ body {
 }
 
 #app-container {
-  .navigation-site {
+  .fixed {
+    position: fixed;
+    left: 0;
+    top: 5px;
+    right: 0;
     height: 55px;
-    margin-top: 10px;
-    width: 100%;
-    margin: 0;
-    padding: 5px;
+
+    .navigation {
+      height: 55px;
+      position: relative;
+      left: 0;
+      width: 1100px;
+      margin: auto;
+      padding: 5px;
+      overflow: hidden;
+    }
 
     a {
-      color: wheat;
+      color: red;
     }
   }
 }
