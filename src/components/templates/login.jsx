@@ -4,6 +4,9 @@ import { reduxForm, Field, formValueSelector } from "redux-form";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+import Navigation from "../templates/navigation";
+import LoginNav from "../templates/loginNav";
+
 // Import the helpers.. that we'll make here in the next step
 // import Messages from '../../containers/notifications/SignupSuccess'
 // import Errors from '../../containers/notifications/SignupErrors'
@@ -31,49 +34,58 @@ class Login extends Component {
     } = this.props;
 
     return (
-      <div className="container login">
-        <div className="form-group">
-          <div className="box-form">
-            {/* Use the Submit handler with our own submit handler*/}
-            <form id="login" onSubmit={handleSubmit(this.submit)}>
-              <div className="signup-form">
-                <div className="form-group">
-                  <label htmlFor="username">
-                    <h3>Username</h3>
-                  </label>
-                  <Field
-                    name="username"
-                    type="text"
-                    className="form-control"
-                    placeholder="Username"
-                    component="input"
-                  />
-                  <label htmlFor="password">
-                    <h3>Password</h3>
-                  </label>
-                  <Field
-                    name="password"
-                    type="password"
-                    className="form-control"
-                    placeholder="Password"
-                    component="input"
-                  />
-                </div>
-                <button action="submit">LOGIN</button>
-              </div>
-            </form>
+      <div id="app-container">
+        <div className="fixed">
+          <div className="row navigation">
+            <div className="col-md-">
+              <Navigation />
+            </div>
+            <div className=".col-sm-">
+              <LoginNav />
+            </div>
           </div>
-          <div className="auth-messages">
-            {!requesting && !!errors.length && <Errors errors={errors} />}
-            {!requesting &&
-              !!messages.length && <Messages messages={messages} />}
-            {!requesting &&
-              successful && (
+        </div>
+        <div id="login-form-group">
+          <div className="wrapper">
+            <div className="form-header">Car-App.</div>
+            <div className="box-form">
+              {/* Use the Submit handler with our own submit handler*/}
+              <form id="login" onSubmit={handleSubmit(this.submit)}>
+                <div className="signup-form">
+                  <div className="form-group">
+                    <Field
+                      name="username"
+                      type="text"
+                      className="username"
+                      placeholder="Username"
+                      component="input"
+                    />
+                    <Field
+                      name="password"
+                      type="password"
+                      className="password"
+                      placeholder="Password"
+                      component="input"
+                    />
+                  </div>
+                  <button classname="login-button" action="submit">
+                    LOGIN
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div className="auth-messages">
+              {!requesting && !!errors.length && <Errors errors={errors} />}
+              {!requesting && !!messages.length && (
+                <Messages messages={messages} />
+              )}
+              {!requesting && successful && (
                 <div>
                   Login Successful!
                   {/* <Link to="/login">Click here to Login »</Link> */}
                 </div>
               )}
+            </div>
           </div>
         </div>
       </div>

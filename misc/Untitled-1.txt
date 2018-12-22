@@ -1,0 +1,47 @@
+            value = ""
+
+            try:
+                value_good = rows[i].find_elements_by_xpath("""//a[contains(@class,"badge-good-price")]""").get_attribute("class")
+            except:
+                value_good = ""
+            try:
+                value_great = rows[i].find_elements_by_xpath("""//a[contains(@class,"badge-great-price")]""").get_attribute("class")
+            except:
+                value_great = ""
+            
+            if value_good != "":
+                value = value_good
+            if value_great != "":
+                value = value_great
+            
+            print(value)
+            if value != "":
+                title = rows[i].find_elements_by_xpath("""//div[contains(@class,"title ")]/a/h2""")[i].text
+                odometer_raw = rows[i].find_elements_by_xpath("""//div[contains(@class,"listing-body")]/div[contains(@class,"ad-info")]/div[contains(@class,"ad-features")]/div[contains(@class,"vehicle-features")]/div[contains(@class,"listing-feature")][1]/div[contains(@class,"feature-text")]""")[i].text
+                body = rows[i].find_elements_by_xpath("""//div[contains(@class,"listing-body")]/div[contains(@class,"ad-info")]/div[contains(@class,"ad-features")]/div[contains(@class,"vehicle-features")]/div[contains(@class,"listing-feature")][2]/div[contains(@class,"feature-text")]""")[i].text
+                transmission = rows[i].find_elements_by_xpath("""//div[contains(@class,"listing-body")]/div[contains(@class,"ad-info")]/div[contains(@class,"ad-features")]/div[contains(@class,"vehicle-features")]/div[contains(@class,"listing-feature")][3]/div[contains(@class,"feature-text")]""")[i].text
+                engine = rows[i].find_elements_by_xpath("""//div[contains(@class,"listing-body")]/div[contains(@class,"ad-info")]/div[contains(@class,"ad-features")]/div[contains(@class,"vehicle-features")]/div[contains(@class,"listing-feature")][4]/div[contains(@class,"feature-text")]""")[i].text
+                price_raw = rows[i].find_elements_by_xpath("""//div[contains(@class,"ad-price")]/a/div[@class="price"][1]""")[i].text
+                link_raw = rows[i].find_elements_by_xpath("""//div[contains(@class,"location-info")]/div[contains(@class,"action-buttons")]/a""")[i].get_attribute("href")
+                year_raw = title[:4]
+                try:
+                    year = int(year_raw)
+                except:
+                    year = ""
+                odometer_replace = odometer_raw.replace(" km","").replace(",","")
+                try:
+                    odometer = int(odometer_replace)
+                except:
+                    odometer = ""
+                price_replace = price_raw.replace("$","").replace(",","").replace("*","")
+                try:
+                    price = int(price_replace)
+                except:
+                    price = ""
+                link_split = link_raw.split("?")
+                link = link_split[0]
+                i = i + 1
+                timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+                query = """INSERT INTO carsales_results_raw (source, make_id, model_id, year, odometer, body, transmission, engine, price, value, link) VALUES ('Carsales', '{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}') ON DUPLICATE KEY UPDATE price = '{7}', last_update = '{10}' """.format(z[1], z[3], year, odometer, body, transmission, engine, price, value, link, timestamp)
+                cursor.execute(query)
+                con.commit()

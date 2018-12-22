@@ -16,6 +16,9 @@ import {
   parallaxContainer4Banner1Group2Text2,
   parallaxContainer4Banner1Group3Text1,
   parallaxContainer4Banner1Group3Text2,
+  parallaxContainer4Banner2Visual1,
+  parallaxContainer4Banner2Visual2,
+  parallaxContainer4Banner2Visual3,
   parallaxContainer5,
   parallaxContainer5Banner1Text1,
   parallaxContainer5Banner1Text2,
@@ -47,7 +50,7 @@ const HomePage = () => (
               </div>
               <div className="join">
                 <div className="para-1">
-                  <h5>Car-App</h5>
+                  <h5>Car-App.</h5>
                   <p>Revolutionising how you get used car bagains.</p>
                 </div>
                 <div className="para-2">
@@ -68,11 +71,11 @@ const HomePage = () => (
               >
                 <video className="videoTag" autoPlay loop muted>
                   <source
-                    src="https://14-lvl3-pdl.vimeocdn.com/01/4228/4/121142413/342125205.mp4?expires=1542726023&token=0da20e74bde9b1cca4827"
+                    src="https://ak5.picdn.net/shutterstock/videos/24035875/preview/stock-footage-growing-global-network-and-data-connections-you-can-use-it-for-a-technology-communication-or.webm"
                     type="video/mp4"
                   />
                   <source
-                    src="https://14-lvl3-pdl.vimeocdn.com/01/4228/4/121142413/342125205.mp4?expires=1542726023&token=0da20e74bde9b1cca4827"
+                    src="https://ak5.picdn.net/shutterstock/videos/24035875/preview/stock-footage-growing-global-network-and-data-connections-you-can-use-it-for-a-technology-communication-or.webm"
                     type="video/ogg"
                   />
                 </video>
@@ -87,11 +90,11 @@ const HomePage = () => (
               <div className="visual">
                 <video className="videoTag" autoPlay loop muted>
                   <source
-                    src="https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/736/10/253684552/924824809.mp4?token=1542727221-0xa809a98191453ba71ccbda69bbaeccecfdcbb893"
+                    src="https://ak4.picdn.net/shutterstock/videos/1010242904/preview/stock-footage-a-man-chooses-to-buy-a-car-on-the-site-looking-at-used-vehicle-to-buy-on-a-smartphone-app-close.webm"
                     type="video/mp4"
                   />
                   <source
-                    src="https://fpdl.vimeocdn.com/vimeo-prod-skyfire-std-us/01/736/10/253684552/924824809.mp4?token=1542727221-0xa809a98191453ba71ccbda69bbaeccecfdcbb893"
+                    src="https://ak4.picdn.net/shutterstock/videos/1010242904/preview/stock-footage-a-man-chooses-to-buy-a-car-on-the-site-looking-at-used-vehicle-to-buy-on-a-smartphone-app-close.webm"
                     type="video/ogg"
                   />
                 </video>
@@ -220,9 +223,33 @@ const HomePage = () => (
             </div>
             <div className="banner-2">
               <div className="visual-wrapper">
-                <div className="visual-1">Visual 1</div>
-                <div className="visual-2">Visual 2</div>
-                <div className="visual-3">Visual 3</div>
+                <div className="visual-1">
+                  <Plx
+                    className="parallaxContainer4Banner2Visual1"
+                    parallaxData={parallaxContainer4Banner2Visual1}
+                  >
+                    <img
+                      src={require("../../images/toyota.png")}
+                      alt="Toyota"
+                    />
+                  </Plx>
+                </div>
+                <div className="visual-2">
+                  <Plx
+                    className="parallaxContainer4Banner2Visual1"
+                    parallaxData={parallaxContainer4Banner2Visual2}
+                  >
+                    <img src={require("../../images/x3.png")} alt="X3" />
+                  </Plx>
+                </div>
+                <div className="visual-3">
+                  <Plx
+                    className="parallaxContainer4Banner2Visual1"
+                    parallaxData={parallaxContainer4Banner2Visual3}
+                  >
+                    <img src={require("../../images/gtr.png")} alt="GTR" />
+                  </Plx>
+                </div>
               </div>
             </div>
           </div>

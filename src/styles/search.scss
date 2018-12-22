@@ -1,0 +1,61 @@
+#landing {
+  .wrapper {
+    .App {
+      .container-1 {
+        margin-top: 40px;
+        margin-bottom: 40px;
+
+        .search-header {
+          margin-bottom: 10px;
+
+          font-size: 20px;
+          font-weight: 800;
+        }
+
+        .search {
+          width: calc(1200px - 110px);
+
+          #Search {
+            border: 1px solid red;
+            border-radius: 20px;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+
+            .dropdown {
+              padding-bottom: 30px;
+              .btn {
+                width: 100%;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                background-color: white;
+                color: black;
+              }
+            }
+
+            .min-price {
+              padding-top: 10px;
+              padding-bottom: 10px;
+              height: auto;
+            }
+
+            .max-price {
+              padding-top: 10px;
+              padding-bottom: 10px;
+              height: auto;
+            }
+          }
+
+          button {
+            float: right;
+            width: 33.33%;
+            font-weight: 800;
+            background-color: red;
+            border: none;
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+}

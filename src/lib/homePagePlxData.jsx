@@ -351,6 +351,114 @@ export const parallaxContainer4Banner1Group3Text2 = [
   }
 ];
 
+export const parallaxContainer4Banner2Visual1 = [
+  {
+    start: 0,
+    end: 2800,
+    properties: [
+      {
+        startValue: 1000,
+        endValue: 1000,
+        property: "translateX"
+      }
+    ]
+  },
+  {
+    start: 2800,
+    end: 3100,
+    properties: [
+      {
+        startValue: 1000,
+        endValue: 0,
+        property: "translateX"
+      }
+    ]
+  },
+  {
+    start: 3200,
+    end: 3300,
+    properties: [
+      {
+        startValue: 0,
+        endValue: -1000,
+        property: "translateX"
+      }
+    ]
+  }
+];
+
+export const parallaxContainer4Banner2Visual2 = [
+  {
+    start: 0,
+    end: 3000,
+    properties: [
+      {
+        startValue: 2000,
+        endValue: 2000,
+        property: "translateX"
+      }
+    ]
+  },
+  {
+    start: 3000,
+    end: 3400,
+    properties: [
+      {
+        startValue: 2000,
+        endValue: 1000,
+        property: "translateX"
+      }
+    ]
+  },
+  {
+    start: 3400,
+    end: 3500,
+    properties: [
+      {
+        startValue: 1000,
+        endValue: -200,
+        property: "translateX"
+      }
+    ]
+  },
+  {
+    start: 3700,
+    end: 3800,
+    properties: [
+      {
+        startValue: -200,
+        endValue: -1500,
+        property: "translateX"
+      }
+    ]
+  }
+];
+
+export const parallaxContainer4Banner2Visual3 = [
+  {
+    start: 0,
+    end: 3800,
+    properties: [
+      {
+        startValue: 1000,
+        endValue: 1000,
+        property: "translateX"
+      }
+    ]
+  },
+  {
+    start: 3800,
+    end: 3900,
+    properties: [
+      {
+        startValue: 1000,
+        endValue: -800,
+        property: "translateX"
+      }
+    ]
+  }
+];
+
 export const parallaxContainer4Overlay = [
   {
     start: 2050,

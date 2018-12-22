@@ -65,122 +65,132 @@ class CarLandingPage extends Component {
     };
 
     return (
-      <div className="container">
+      <div id="app-container">
         {user.firstname ? (
           <div>
-            <div className="row justify-content-md-center">
-              <div className="col-md-">
-                <Navigation />
-              </div>
-              <div className=".col-sm-">
-                <LoginNav />
+            <div className="fixed">
+              <div className="row navigation">
+                <div className="col-md-">
+                  <Navigation />
+                </div>
+                <div className=".col-sm-">
+                  <LoginNav />
+                </div>
               </div>
             </div>
             <div id="landing" className="row justify-content-md-center">
-              <div className="App">
-                {/* Heading for Welcome */}
-                <header className="App-header">
-                  <div className="row justify-content-md-center">
-                    Welcome {user.firstname}
-                  </div>
-                </header>
+              <div className="wrapper">
+                <div className="App">
+                  {/* Heading for Welcome */}
+                  <header className="App-header">
+                    <div className="row justify-content-md-center">
+                      Welcome {user.firstname}
+                    </div>
+                  </header>
 
-                {/* Search Container */}
-                <Search />
-
-                {/* Current Searches */}
-                <div className="container">
-                  <div className="row justify-content-md-center">
-                    Current Searches
+                  {/* Search Container */}
+                  <div className="container-1">
+                    <Search />
                   </div>
 
-                  {/* Repeating Results */}
-                  {runningSearch != undefined ? (
-                    runningSearch.map(searchRes => (
-                      <div
-                        className="row justify-content-md-center border"
-                        key={searchRes.search_id}
-                      >
-                        <div className="col">
-                          <div className="row align-items-center">
-                            <div className="col-4">
-                              <div className="row align-items-center">
-                                <div className="col">Make</div>
+                  {/* Current Searches */}
+                  <div className="container-2">
+                    <div className="row justify-content-md-center">
+                      Current Searches
+                    </div>
+
+                    {/* Repeating Results */}
+                    {runningSearch != undefined ? (
+                      runningSearch.map(searchRes => (
+                        <div
+                          className="row justify-content-md-center border"
+                          key={searchRes.search_id}
+                        >
+                          <div className="col">
+                            <div className="row align-items-center">
+                              <div className="col-4">
+                                <div className="row align-items-center">
+                                  <div className="col">Make</div>
+                                </div>
+                                <div className="row align-items-center">
+                                  <div className="col">
+                                    {searchRes.make_name}
+                                  </div>
+                                </div>
                               </div>
-                              <div className="row align-items-center">
-                                <div className="col">{searchRes.make_name}</div>
+                              <div className="col-4">
+                                <div className="row align-items-center">
+                                  <div className="col">Model</div>
+                                </div>
+                                <div className="row align-items-center">
+                                  <div className="col">
+                                    {searchRes.model_name}
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                            <div className="col-4">
-                              <div className="row align-items-center">
-                                <div className="col">Model</div>
-                              </div>
-                              <div className="row align-items-center">
-                                <div className="col">
-                                  {searchRes.model_name}
+                              <div className="col-4">
+                                <div className="row align-items-center">
+                                  <div className="col">Status</div>
+                                </div>
+                                <div className="row align-items-center">
+                                  <div className="col">
+                                    {searchRes.status == 0
+                                      ? "Running"
+                                      : "Suspended"}
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                            <div className="col-4">
-                              <div className="row align-items-center">
-                                <div className="col">Status</div>
-                              </div>
-                              <div className="row align-items-center">
-                                <div className="col">
-                                  {searchRes.status == 0
-                                    ? "Running"
-                                    : "Suspended"}
+                            <div className="row align-items-center">
+                              <div className="col-4">
+                                <div className="row align-items-center">
+                                  <div className="col">Price Range</div>
+                                </div>
+                                <div className="row align-items-center">
+                                  <div className="col">
+                                    ${searchRes.min_price} - $
+                                    {searchRes.max_price}
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </div>
-                          <div className="row align-items-center">
-                            <div className="col-4">
-                              <div className="row align-items-center">
-                                <div className="col">Price Range</div>
-                              </div>
-                              <div className="row align-items-center">
-                                <div className="col">
-                                  ${searchRes.min_price} - $
-                                  {searchRes.max_price}
+                              <div className="col-4">
+                                <div className="row align-items-center">
+                                  <div className="col">Location</div>
+                                </div>
+                                <div className="row align-items-center">
+                                  <div className="col">
+                                    {searchRes.location}
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div className="col-4">
-                              <div className="row align-items-center">
-                                <div className="col">Location</div>
-                              </div>
-                              <div className="row align-items-center">
-                                <div className="col">{searchRes.location}</div>
-                              </div>
-                            </div>
-                            <div className="col-4">
-                              <div className="row align-items-center">
-                                <div className="col">
-                                  <button
-                                    className="btn btn-secondary"
-                                    searchid={searchRes.search_id}
-                                    onClick={e =>
-                                      this.handleShow(
-                                        e.target.getAttribute("searchid")
-                                      )
-                                    }
-                                  >
-                                    --
-                                  </button>
+                              <div className="col-4">
+                                <div className="row align-items-center">
+                                  <div className="col">
+                                    <button
+                                      className="btn btn-secondary"
+                                      searchid={searchRes.search_id}
+                                      onClick={e =>
+                                        this.handleShow(
+                                          e.target.getAttribute("searchid")
+                                        )
+                                      }
+                                    >
+                                      --
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
+                      ))
+                    ) : (
+                      <div className="row justify-content-md-center border">
+                        <div className="col">Loading...</div>
                       </div>
-                    ))
-                  ) : (
-                    <div className="row justify-content-md-center border">
-                      <div className="col">Loading...</div>
-                    </div>
-                  )}
-                  {/* Repeat Ends Here */}
+                    )}
+                    {/* Repeat Ends Here */}
+                  </div>
                 </div>
               </div>
             </div>
