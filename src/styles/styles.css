@@ -624,10 +624,61 @@ body {
     max-width: 1200px;
     display: flex;
     position: absolute;
-    top: 20vh; }
+    top: 10vh; }
+    #landing .wrapper .App .bg-img {
+      width: calc(100vw - 8px);
+      margin-left: -220px;
+      display: block;
+      z-index: -99;
+      position: absolute;
+      height: 550px;
+      background-image: url("https://images.pexels.com/photos/326259/pexels-photo-326259.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      overflow-y: hidden; }
+      #landing .wrapper .App .bg-img .bg-overlay {
+        width: 100vw;
+        height: 100px;
+        z-index: -98;
+        position: absolute;
+        height: 550px;
+        background-color: rgba(10, 10, 10, 0.4); }
     #landing .wrapper .App .App-header {
       font-size: 30px;
-      font-weight: 800; }
+      font-weight: 800;
+      width: calc(1200px - 110px);
+      z-index: 999;
+      padding-top: 50px;
+      padding-bottom: 80px; }
+    #landing .wrapper .App .container-1 {
+      z-index: 999; }
+    #landing .wrapper .App .container-2 {
+      margin-top: 130px;
+      margin-bottom: 40px;
+      padding-left: 15px;
+      padding-right: 15px;
+      width: calc(1200px - 110px); }
+      #landing .wrapper .App .container-2 .running-header {
+        margin-bottom: 10px;
+        font-size: 20px;
+        font-weight: 800; }
+      #landing .wrapper .App .container-2 .running {
+        border: 1px solid red;
+        border-radius: 10px;
+        padding: 20px 40px 20px 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        margin-bottom: 5px; }
+        #landing .wrapper .App .container-2 .running .running-row {
+          padding-top: 5px;
+          padding-bottom: 5px;
+          font-weight: bold; }
+      #landing .wrapper .App .container-2 .header {
+        font-size: 15px;
+        font-weight: 200; }
+      #landing .wrapper .App .container-2 .btn {
+        width: 33.33%; }
 
 #landing .wrapper .App .container-1 {
   margin-top: 40px;
@@ -640,9 +691,9 @@ body {
     width: calc(1200px - 110px); }
     #landing .wrapper .App .container-1 .search #Search {
       border: 1px solid red;
-      border-radius: 20px;
+      border-radius: 10px;
       padding: 40px;
-      background-color: rgba(255, 255, 255, 0.2); }
+      background-color: rgba(230, 230, 230, 0.3); }
       #landing .wrapper .App .container-1 .search #Search .dropdown {
         padding-bottom: 30px; }
         #landing .wrapper .App .container-1 .search #Search .dropdown .btn {

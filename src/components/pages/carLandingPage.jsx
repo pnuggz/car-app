@@ -81,36 +81,43 @@ class CarLandingPage extends Component {
             <div id="landing" className="row justify-content-md-center">
               <div className="wrapper">
                 <div className="App">
-                  {/* Heading for Welcome */}
-                  <header className="App-header">
-                    <div className="row justify-content-md-center">
-                      Welcome {user.firstname}
+                  <div className="top-wrapper">
+                    {/* Background Image */}
+                    <div className="bg-img">
+                      <div className="bg-overlay" />
                     </div>
-                  </header>
 
-                  {/* Search Container */}
-                  <div className="container-1">
-                    <Search />
+                    {/* Heading for Welcome */}
+                    <header className="App-header">
+                      <div className="row justify-content-md-center">
+                        Welcome {user.firstname}
+                      </div>
+                    </header>
+
+                    {/* Search Container */}
+                    <div className="container-1">
+                      <Search />
+                    </div>
                   </div>
 
                   {/* Current Searches */}
                   <div className="container-2">
-                    <div className="row justify-content-md-center">
-                      Current Searches
+                    <div className="running-header">
+                      <div className="row">Current Searches</div>
                     </div>
 
                     {/* Repeating Results */}
                     {runningSearch != undefined ? (
                       runningSearch.map(searchRes => (
                         <div
-                          className="row justify-content-md-center border"
+                          className="running row justify-content-md-center"
                           key={searchRes.search_id}
                         >
                           <div className="col">
-                            <div className="row align-items-center">
+                            <div className="running-row row align-items-center">
                               <div className="col-4">
                                 <div className="row align-items-center">
-                                  <div className="col">Make</div>
+                                  <div className="col header">Make</div>
                                 </div>
                                 <div className="row align-items-center">
                                   <div className="col">
@@ -120,7 +127,7 @@ class CarLandingPage extends Component {
                               </div>
                               <div className="col-4">
                                 <div className="row align-items-center">
-                                  <div className="col">Model</div>
+                                  <div className="col header">Model</div>
                                 </div>
                                 <div className="row align-items-center">
                                   <div className="col">
@@ -130,7 +137,7 @@ class CarLandingPage extends Component {
                               </div>
                               <div className="col-4">
                                 <div className="row align-items-center">
-                                  <div className="col">Status</div>
+                                  <div className="col header">Status</div>
                                 </div>
                                 <div className="row align-items-center">
                                   <div className="col">
@@ -141,21 +148,26 @@ class CarLandingPage extends Component {
                                 </div>
                               </div>
                             </div>
-                            <div className="row align-items-center">
+                            <div className="running-row row align-items-center">
                               <div className="col-4">
                                 <div className="row align-items-center">
-                                  <div className="col">Price Range</div>
+                                  <div className="col header">Price Range</div>
                                 </div>
                                 <div className="row align-items-center">
-                                  <div className="col">
-                                    ${searchRes.min_price} - $
-                                    {searchRes.max_price}
-                                  </div>
+                                  {searchRes.min_price == null &&
+                                  searchRes.max_price == null ? (
+                                    <div className="col">Any</div>
+                                  ) : (
+                                    <div className="col">
+                                      ${searchRes.min_price} - $
+                                      {searchRes.max_price}
+                                    </div>
+                                  )}
                                 </div>
                               </div>
                               <div className="col-4">
                                 <div className="row align-items-center">
-                                  <div className="col">Location</div>
+                                  <div className="col header">Location</div>
                                 </div>
                                 <div className="row align-items-center">
                                   <div className="col">
